@@ -33,14 +33,19 @@ public class Toolkit extends JPanel {
 	private JPanel panel_1;
 
 	public Toolkit() {
-		super(new GridLayout(1, 1));
+		Dimension minimumSize = new Dimension(100,100);
+		
 		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.setBounds(0, 0, 450, 300);
 		tabbedPane.setTabPlacement(JTabbedPane.BOTTOM);
+		
+		tabbedPane.setMinimumSize(minimumSize);
+
 
 		// JComponent panel1 = makeTextPanel("Panel #1");
 		
 		panel1 = new JPanel();
-		panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel1.setBorder(null);
 		// setPanel1(panel1);
 		panel1.setLayout(null);
 
@@ -77,16 +82,19 @@ public class Toolkit extends JPanel {
 				String zone;
 				String UDGID;
 				String coor;
-
+				String fixedCoor;
+				
 				input = txtInput.getText().trim();
+			
+				fixedCoor = coordinates(input);
 
-				zone = input.substring(0, 3);
+				zone = fixedCoor.substring(0, 3);
 				txtZone.setText(zone);
 
-				UDGID = input.substring(4, 6);
+				UDGID = fixedCoor.substring(4, 6);
 				txtUSGID.setText(UDGID);
 
-				coor = input.substring(7, 18);
+				coor = fixedCoor.substring(7, 18);
 				txtCoor.setText(coor);
 
 				txtInput.setText("COORDINATES GO HERE...FORMAT XXX XX XXXXX XXXXX");
@@ -154,6 +162,7 @@ public class Toolkit extends JPanel {
 				txtCoor.selectAll();
 			}
 		});
+		setLayout(null);
 		lblCoordinates.setBounds(309, 70, 120, 14);
 		panel1.add(lblCoordinates);
 
@@ -194,8 +203,50 @@ public class Toolkit extends JPanel {
 		frame.getContentPane().add(new Toolkit(), BorderLayout.CENTER);
 
 		// Display the window.
-		frame.pack();
+		//frame.pack();
+		frame.setSize(600, 400);
 		frame.setVisible(true);
+	}
+	
+	public String coordinates(String coord){
+		
+		System.out.println("Lenght of " + coord + " is " + coord.length());
+		
+		String tempA;
+		String tempB;
+		
+		if (coord.length() == 18)
+		{
+			
+		}
+		
+		if (coord.length() == 12) //11S NU 79 00
+		{
+			tempA = coord.substring(7, 9);
+			tempB = coord.substring(10, 12);
+			coord = coord.substring(0, 6) + " " + tempA + "000 " + tempB + "000"; 
+			System.out.println("Again, Lenght of " + coord + " is " + coord.length());
+		}
+		
+		if (coord.length() == 14)//11S NU 791 691
+		{
+			tempA = coord.substring(7, 10);
+			tempB = coord.substring(11, 14);
+			coord = coord.substring(0, 6) + " " + tempA + "00 " + tempB + "00"; 
+			System.out.println("Again, Lenght of " + coord + " is " + coord.length());
+		}
+		if (coord.length() == 16)//11S NU 7910 6910
+		{
+			tempA = coord.substring(7, 11);
+			tempB = coord.substring(12, 16);
+			coord = coord.substring(0, 6) + " " + tempA + "0 " + tempB + "0"; 
+			System.out.println("Again, Lenght of " + coord + " is " + coord.length());
+		}
+		
+		
+		
+		return coord;
+		
 	}
 
 	public static void main(String[] args) {
