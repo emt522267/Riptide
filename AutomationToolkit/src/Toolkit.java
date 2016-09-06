@@ -100,7 +100,7 @@ public class Toolkit extends JPanel {
 				txtInput.setText("COORDINATES GO HERE...FORMAT XXX XX XXXXX XXXXX");
 			}
 		});
-		btnSubmit.setBounds(170, 27, 46, 31);
+		btnSubmit.setBounds(170, 27, 68, 31);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
