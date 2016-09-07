@@ -19,6 +19,7 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class Toolkit extends JPanel {
@@ -30,20 +31,21 @@ public class Toolkit extends JPanel {
 	Button btnSubmit;
 	JTextField txtUSGID;
 	JTextField txtCoor;
-	private JPanel panel_1;
+	private JPanel panel2;
+	private JTextField txtIn;
+	private JTextField txtOut;
 
 	public Toolkit() {
-		Dimension minimumSize = new Dimension(100,100);
-		
+		Dimension minimumSize = new Dimension(100, 100);
+
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.setBounds(0, 0, 450, 300);
 		tabbedPane.setTabPlacement(JTabbedPane.BOTTOM);
-		
+
 		tabbedPane.setMinimumSize(minimumSize);
 
-
 		// JComponent panel1 = makeTextPanel("Panel #1");
-		
+
 		panel1 = new JPanel();
 		panel1.setBorder(null);
 		// setPanel1(panel1);
@@ -83,9 +85,9 @@ public class Toolkit extends JPanel {
 				String UDGID;
 				String coor;
 				String fixedCoor;
-				
+
 				input = txtInput.getText().trim();
-			
+
 				fixedCoor = coordinates(input);
 
 				zone = fixedCoor.substring(0, 3);
@@ -94,7 +96,7 @@ public class Toolkit extends JPanel {
 				UDGID = fixedCoor.substring(4, 6);
 				txtUSGID.setText(UDGID);
 
-				coor = fixedCoor.substring(7, 18);
+				coor = fixedCoor.substring(7, 17);
 				txtCoor.setText(coor);
 
 				txtInput.setText("COORDINATES GO HERE...FORMAT XXX XX XXXXX XXXXX");
@@ -169,15 +171,63 @@ public class Toolkit extends JPanel {
 		tabbedPane.addTab("Coordinate Splitter", panel1);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
-	
-
 		// Add the tabbed pane to this panel.
 		add(tabbedPane);
-		
-		panel_1 = new JPanel();
-		panel_1.setLayout(null);
-		panel_1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		tabbedPane.addTab("Formation Splitter", null, panel_1, null);
+
+		panel2 = new JPanel();
+		panel2.setLayout(null);
+		panel2.setBorder(new EmptyBorder(5, 5, 5, 5));
+		tabbedPane.addTab("Remove Special Chars", null, panel2, null);
+
+		txtIn = new JTextField();
+		txtIn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				txtIn.selectAll();
+			}
+		});
+		txtIn.setBounds(10, 29, 223, 20);
+		panel2.add(txtIn);
+		txtIn.setColumns(10);
+
+		txtOut = new JTextField();
+		txtOut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtOut.selectAll();
+			}
+		});
+		txtOut.setBounds(10, 117, 223, 20);
+		panel2.add(txtOut);
+		txtOut.setColumns(10);
+
+		JLabel lblNewLabel = new JLabel("In:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel.setBounds(187, 11, 46, 14);
+		panel2.add(lblNewLabel);
+
+		JLabel lblNewLabel_1 = new JLabel("Out:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel_1.setBounds(187, 97, 46, 14);
+		panel2.add(lblNewLabel_1);
+
+		JButton btnTransform = new JButton("Transform");
+		btnTransform.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String in;
+
+				in = txtIn.getText().trim();
+
+				in = in.replaceAll("[^\\d.]", "");
+
+				txtOut.setText(in);
+
+			}
+		});
+		btnTransform.setBounds(10, 169, 115, 23);
+		panel2.add(btnTransform);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { tabbedPane, filler, panel }));
 	}
 
@@ -203,50 +253,50 @@ public class Toolkit extends JPanel {
 		frame.getContentPane().add(new Toolkit(), BorderLayout.CENTER);
 
 		// Display the window.
-		//frame.pack();
+		// frame.pack();
 		frame.setSize(600, 400);
 		frame.setVisible(true);
 	}
-	
-	public String coordinates(String coord){
-		
+
+	public String coordinates(String coord) {
+
 		System.out.println("Lenght of " + coord + " is " + coord.length());
-		
+
 		String tempA;
 		String tempB;
-		
-		if (coord.length() == 18)
-		{
-			
+
+		if (coord.length() == 18) {
+			tempA = coord.substring(7, 12);
+			tempB = coord.substring(13, 18);
+			coord = coord.substring(0, 6) + " " + tempA + tempB;
+			System.out.println("Again, Lenght of " + coord + " is " + coord.length());
 		}
-		
-		if (coord.length() == 12) //11S NU 79 00
+
+		if (coord.length() == 12) // 11S NU 79 00
 		{
 			tempA = coord.substring(7, 9);
 			tempB = coord.substring(10, 12);
-			coord = coord.substring(0, 6) + " " + tempA + "000 " + tempB + "000"; 
+			coord = coord.substring(0, 6) + " " + tempA + "000" + tempB + "000";
 			System.out.println("Again, Lenght of " + coord + " is " + coord.length());
 		}
-		
-		if (coord.length() == 14)//11S NU 791 691
+
+		if (coord.length() == 14)// 11S NU 791 691
 		{
 			tempA = coord.substring(7, 10);
 			tempB = coord.substring(11, 14);
-			coord = coord.substring(0, 6) + " " + tempA + "00 " + tempB + "00"; 
+			coord = coord.substring(0, 6) + " " + tempA + "00" + tempB + "00";
 			System.out.println("Again, Lenght of " + coord + " is " + coord.length());
 		}
-		if (coord.length() == 16)//11S NU 7910 6910
+		if (coord.length() == 16)// 11S NU 7910 6910
 		{
 			tempA = coord.substring(7, 11);
 			tempB = coord.substring(12, 16);
-			coord = coord.substring(0, 6) + " " + tempA + "0 " + tempB + "0"; 
+			coord = coord.substring(0, 6) + " " + tempA + "0" + tempB + "0";
 			System.out.println("Again, Lenght of " + coord + " is " + coord.length());
 		}
-		
-		
-		
+
 		return coord;
-		
+
 	}
 
 	public static void main(String[] args) {
