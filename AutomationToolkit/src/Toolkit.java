@@ -229,56 +229,54 @@ public class Toolkit extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 
 				String input;
-				String a = "";
-				
+			
+
 				String formation;
 				String spacing;
 
 				input = txtCompare.getText().trim();
+
+				String[] items = input.split("/");
+				System.out.println(Arrays.toString(items));
+
+				formation = items[0].trim();
+				spacing = items[1].trim();
 				
-				 
-				 String[] items = input.split("/");
-				 System.out.println(Arrays.toString(items));
-				 
-				 formation = items[0].trim();
-				 spacing = items[1].trim();
-				 
-				 txtFormation.setText(formation);
+				spacing = spacing.replace("m", "");
+
+				txtFormation.setText(formation);
 				txtSpacing.setText(spacing);
 
 				BufferedImage myPicture = null;
 				try {
 
-					a = "images/" + getImage(formation) + ".png";
-					System.out.println(a);
-
-					myPicture = ImageIO.read(new File(a));
+					myPicture = ImageIO.read(ResourceLoader.load(getImage(formation)));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				lblImage.setIcon(new ImageIcon(a));
+				lblImage.setIcon(new ImageIcon(myPicture));
 
 			}
 		});
 		btnGo.setBounds(163, 57, 70, 22);
 		panel3.add(btnGo);
-		
+
 		txtFormation = new JTextField();
 		txtFormation.setBounds(10, 125, 185, 20);
 		panel3.add(txtFormation);
 		txtFormation.setColumns(10);
-		
+
 		lblFormation = new JLabel("Formation:");
 		lblFormation.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblFormation.setBounds(96, 107, 99, 14);
 		panel3.add(lblFormation);
-		
+
 		txtSpacing = new JTextField();
 		txtSpacing.setBounds(250, 125, 185, 20);
 		panel3.add(txtSpacing);
 		txtSpacing.setColumns(10);
-		
+
 		lblSpacing = new JLabel("Spacing:");
 		lblSpacing.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblSpacing.setBounds(336, 107, 99, 14);
@@ -509,6 +507,8 @@ public class Toolkit extends JPanel {
 
 			img = "wedgeright";
 		}
+
+		img = img + ".png";
 
 		return img;
 	}
