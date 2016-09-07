@@ -236,11 +236,20 @@ public class Toolkit extends JPanel {
 
 				input = txtCompare.getText().trim();
 
+			
 				String[] items = input.split("/");
 				System.out.println(Arrays.toString(items));
 
 				formation = items[0].trim();
+				
+				
+				try{
+					
 				spacing = items[1].trim();
+				}
+				catch (ArrayIndexOutOfBoundsException ex){
+					spacing = "n/a";
+				}
 				
 				spacing = spacing.replace("m", "");
 
@@ -256,6 +265,8 @@ public class Toolkit extends JPanel {
 					e.printStackTrace();
 				}
 				lblImage.setIcon(new ImageIcon(myPicture));
+				
+				txtCompare.setText("");
 
 			}
 		});
@@ -263,6 +274,13 @@ public class Toolkit extends JPanel {
 		panel3.add(btnGo);
 
 		txtFormation = new JTextField();
+		txtFormation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				txtFormation.selectAll();
+			}
+		});
 		txtFormation.setBounds(10, 125, 185, 20);
 		panel3.add(txtFormation);
 		txtFormation.setColumns(10);
@@ -273,6 +291,14 @@ public class Toolkit extends JPanel {
 		panel3.add(lblFormation);
 
 		txtSpacing = new JTextField();
+		txtSpacing.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				txtSpacing.selectAll();
+				
+			}
+		});
 		txtSpacing.setBounds(250, 125, 185, 20);
 		panel3.add(txtSpacing);
 		txtSpacing.setColumns(10);
@@ -507,6 +533,24 @@ public class Toolkit extends JPanel {
 
 			img = "wedgeright";
 		}
+		
+		if (f.equals("insurgents") == true) {
+
+			img = "Insurgents";
+		}
+
+		if (f.equals("usmc") == true) {
+
+			img = "USMC";
+		}
+
+		if (f.equals("civilian") == true) {
+
+			img = "Civilians";
+		}
+
+
+
 
 		img = img + ".png";
 
