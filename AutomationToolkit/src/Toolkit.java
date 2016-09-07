@@ -13,16 +13,26 @@ import java.awt.event.ActionEvent;
 import java.awt.Button;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JSeparator;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class Toolkit extends JPanel {
+
 	private JLabel filler;
 	private JPanel panel;
 	JPanel panel1;
@@ -34,6 +44,14 @@ public class Toolkit extends JPanel {
 	private JPanel panel2;
 	private JTextField txtIn;
 	private JTextField txtOut;
+	JPanel panel3;
+	private JTextField txtCompare;
+	private JLabel lblLookup;
+	private JLabel lblImage;
+	private JTextField txtFormation;
+	private JLabel lblFormation;
+	private JTextField txtSpacing;
+	private JLabel lblSpacing;
 
 	public Toolkit() {
 		Dimension minimumSize = new Dimension(100, 100);
@@ -174,6 +192,98 @@ public class Toolkit extends JPanel {
 		// Add the tabbed pane to this panel.
 		add(tabbedPane);
 
+		panel3 = new JPanel();
+		panel3.setBorder(null);
+		// setpanel3(panel3);
+		panel3.setLayout(null);
+
+		tabbedPane.addTab("Image Compare", panel3);
+
+		txtCompare = new JTextField();
+		txtCompare.setBounds(10, 31, 425, 20);
+		panel3.add(txtCompare);
+		txtCompare.setColumns(10);
+
+		lblLookup = new JLabel("Lookup:");
+		lblLookup.setBounds(389, 11, 46, 14);
+		panel3.add(lblLookup);
+
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.MAGENTA);
+		separator.setBackground(Color.YELLOW);
+		separator.setBounds(10, 200, 425, 10);
+		panel3.add(separator);
+
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.YELLOW);
+		separator_1.setBackground(Color.MAGENTA);
+		separator_1.setBounds(10, 251, 425, 10);
+		panel3.add(separator_1);
+		lblImage = new JLabel("");
+
+		lblImage.setBounds(96, 210, 243, 40);
+		panel3.add(lblImage);
+
+		Button btnGo = new Button("Submit");
+		btnGo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String input;
+				String a = "";
+				
+				String formation;
+				String spacing;
+
+				input = txtCompare.getText().trim();
+				
+				 
+				 String[] items = input.split("/");
+				 System.out.println(Arrays.toString(items));
+				 
+				 formation = items[0].trim();
+				 spacing = items[1].trim();
+				 
+				 txtFormation.setText(formation);
+				txtSpacing.setText(spacing);
+
+				BufferedImage myPicture = null;
+				try {
+
+					a = "images/" + getImage(formation) + ".png";
+					System.out.println(a);
+
+					myPicture = ImageIO.read(new File(a));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				lblImage.setIcon(new ImageIcon(a));
+
+			}
+		});
+		btnGo.setBounds(163, 57, 70, 22);
+		panel3.add(btnGo);
+		
+		txtFormation = new JTextField();
+		txtFormation.setBounds(10, 125, 185, 20);
+		panel3.add(txtFormation);
+		txtFormation.setColumns(10);
+		
+		lblFormation = new JLabel("Formation:");
+		lblFormation.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblFormation.setBounds(96, 107, 99, 14);
+		panel3.add(lblFormation);
+		
+		txtSpacing = new JTextField();
+		txtSpacing.setBounds(250, 125, 185, 20);
+		panel3.add(txtSpacing);
+		txtSpacing.setColumns(10);
+		
+		lblSpacing = new JLabel("Spacing:");
+		lblSpacing.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblSpacing.setBounds(336, 107, 99, 14);
+		panel3.add(lblSpacing);
+
 		panel2 = new JPanel();
 		panel2.setLayout(null);
 		panel2.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -202,15 +312,15 @@ public class Toolkit extends JPanel {
 		panel2.add(txtOut);
 		txtOut.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("In:");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel.setBounds(187, 11, 46, 14);
-		panel2.add(lblNewLabel);
+		JLabel lblIn = new JLabel("In:");
+		lblIn.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblIn.setBounds(187, 11, 46, 14);
+		panel2.add(lblIn);
 
-		JLabel lblNewLabel_1 = new JLabel("Out:");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel_1.setBounds(187, 97, 46, 14);
-		panel2.add(lblNewLabel_1);
+		JLabel lblOut = new JLabel("Out:");
+		lblOut.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblOut.setBounds(187, 97, 46, 14);
+		panel2.add(lblOut);
 
 		JButton btnTransform = new JButton("Transform");
 		btnTransform.addActionListener(new ActionListener() {
@@ -229,6 +339,12 @@ public class Toolkit extends JPanel {
 		btnTransform.setBounds(10, 169, 115, 23);
 		panel2.add(btnTransform);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { tabbedPane, filler, panel }));
+		setLayout(null);
+		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+
+		// Add the tabbed pane to this panel.
+		add(tabbedPane);
+
 	}
 
 	protected JComponent makeTextPanel(String text) {
@@ -299,6 +415,104 @@ public class Toolkit extends JPanel {
 
 	}
 
+	public String getImage(String f) {
+
+		String img = "";
+		f = f.toLowerCase();
+
+		if (f.equals("column") == true) {
+
+			img = "column";
+		}
+
+		if (f.equals("column facing left") == true) {
+
+			img = "colleft";
+		}
+
+		if (f.equals("column facing right") == true) {
+
+			img = "colright";
+		}
+
+		if (f.equals("diamond") == true) {
+
+			img = "diamond";
+		}
+
+		if (f.equals("echelon left") == true) {
+
+			img = "eleft";
+		}
+
+		if (f.equals("echelon right") == true) {
+
+			img = "eright";
+		}
+
+		if (f.equals("file") == true) {
+
+			img = "file";
+		}
+
+		if (f.equals("line") == true) {
+
+			img = "line";
+		}
+
+		if (f.equals("line left") == true) {
+
+			img = "lineleft";
+		}
+
+		if (f.equals("line right") == true) {
+
+			img = "lineright";
+		}
+
+		if (f.equals("overlap echelon right") == true) {
+
+			img = "overlaperight";
+		}
+
+		if (f.equals("staggered column") == true) {
+
+			img = "staggeredcol";
+		}
+
+		if (f.equals("staggered column with lead element advanced") == true) {
+
+			img = "staggeredcolwith";
+		}
+
+		if (f.equals("vee") == true) {
+
+			img = "v";
+		}
+
+		if (f.equals("staggered column") == true) {
+
+			img = "staggeredcol";
+		}
+
+		if (f.equals("wedge") == true) {
+
+			img = "wedge";
+		}
+
+		if (f.equals("wedge left") == true) {
+
+			img = "wedgeleft";
+		}
+
+		if (f.equals("wedge right") == true) {
+
+			img = "wedgeright";
+		}
+
+		return img;
+	}
+
 	public static void main(String[] args) {
 		// Schedule a job for the event dispatch thread:
 		// creating and showing this application's GUI.
@@ -309,5 +523,6 @@ public class Toolkit extends JPanel {
 				createAndShowGUI();
 			}
 		});
+
 	}
 }
