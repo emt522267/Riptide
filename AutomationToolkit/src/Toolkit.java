@@ -200,6 +200,12 @@ public class Toolkit extends JPanel {
 		tabbedPane.addTab("Image Compare", panel3);
 
 		txtCompare = new JTextField();
+		txtCompare.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				txtCompare.setText("");
+			}
+		});
 		txtCompare.setBounds(10, 31, 425, 20);
 		panel3.add(txtCompare);
 		txtCompare.setColumns(10);
