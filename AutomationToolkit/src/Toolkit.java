@@ -395,7 +395,7 @@ public class Toolkit extends JPanel {
 
 		tabbedPane.addTab("Control Measures", panel5);
 
-		JLabel lblPassFail = new JLabel("Pass");
+		JLabel lblPassFail = new JLabel("");
 		lblPassFail.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblPassFail.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPassFail.setBounds(116, 215, 196, 27);
