@@ -14,7 +14,6 @@ import java.awt.Button;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.awt.BorderLayout;
@@ -29,6 +28,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class Toolkit extends JPanel {
@@ -42,9 +42,11 @@ public class Toolkit extends JPanel {
 	JTextField txtUSGID;
 	JTextField txtCoor;
 	private JPanel panel2;
+	private JPanel panel4;
 	private JTextField txtIn;
 	private JTextField txtOut;
 	JPanel panel3;
+	JPanel panel5 = new JPanel();
 	private JTextField txtCompare;
 	private JLabel lblLookup;
 	private JLabel lblImage;
@@ -52,6 +54,7 @@ public class Toolkit extends JPanel {
 	private JLabel lblFormation;
 	private JTextField txtSpacing;
 	private JLabel lblSpacing;
+	private JTextField txtCMIn;
 
 	public Toolkit() {
 		Dimension minimumSize = new Dimension(100, 100);
@@ -61,8 +64,6 @@ public class Toolkit extends JPanel {
 		tabbedPane.setTabPlacement(JTabbedPane.BOTTOM);
 
 		tabbedPane.setMinimumSize(minimumSize);
-
-		// JComponent panel1 = makeTextPanel("Panel #1");
 
 		panel1 = new JPanel();
 		panel1.setBorder(null);
@@ -235,28 +236,24 @@ public class Toolkit extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 
 				String input;
-			
 
 				String formation;
 				String spacing;
 
 				input = txtCompare.getText().trim();
 
-			
 				String[] items = input.split("/");
 				System.out.println(Arrays.toString(items));
 
 				formation = items[0].trim();
-				
-				
-				try{
-					
-				spacing = items[1].trim();
-				}
-				catch (ArrayIndexOutOfBoundsException ex){
+
+				try {
+
+					spacing = items[1].trim();
+				} catch (ArrayIndexOutOfBoundsException ex) {
 					spacing = "n/a";
 				}
-				
+
 				spacing = spacing.replace("m", "");
 
 				txtFormation.setText(formation);
@@ -271,7 +268,7 @@ public class Toolkit extends JPanel {
 					e.printStackTrace();
 				}
 				lblImage.setIcon(new ImageIcon(myPicture));
-				
+
 				txtCompare.setText("");
 
 			}
@@ -283,7 +280,7 @@ public class Toolkit extends JPanel {
 		txtFormation.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				txtFormation.selectAll();
 			}
 		});
@@ -300,9 +297,9 @@ public class Toolkit extends JPanel {
 		txtSpacing.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				txtSpacing.selectAll();
-				
+
 			}
 		});
 		txtSpacing.setBounds(250, 125, 185, 20);
@@ -375,6 +372,102 @@ public class Toolkit extends JPanel {
 		// Add the tabbed pane to this panel.
 		add(tabbedPane);
 
+		panel4 = new JPanel();
+		panel4.setBorder(null);
+		// setpanel4(panel4);
+		panel4.setLayout(null);
+		setLayout(null);
+
+		tabbedPane.addTab("Other", panel4);
+		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+
+		// Add the tabbed pane to this panel.
+		add(tabbedPane);
+		setLayout(null);
+		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
+
+		// Add the tabbed pane to this panel.
+		add(tabbedPane);
+
+		panel5.setBorder(null);
+		// setpanel4(panel4);
+		panel5.setLayout(null);
+
+		tabbedPane.addTab("Control Measures", panel5);
+
+		JLabel lblPassFail = new JLabel("Pass");
+		lblPassFail.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblPassFail.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPassFail.setBounds(116, 215, 196, 27);
+		panel5.add(lblPassFail);
+
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setForeground(Color.ORANGE);
+		separator_2.setBackground(Color.BLUE);
+		separator_2.setBounds(144, 242, 140, 2);
+		panel5.add(separator_2);
+
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setForeground(Color.BLUE);
+		separator_3.setBackground(Color.ORANGE);
+		separator_3.setBounds(144, 215, 140, 2);
+		panel5.add(separator_3);
+
+		txtCMIn = new JTextField();
+		txtCMIn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				txtCMIn.setText("");
+
+			}
+		});
+		txtCMIn.setBounds(10, 23, 425, 20);
+		panel5.add(txtCMIn);
+		txtCMIn.setColumns(10);
+
+		final JLabel lblName = new JLabel("Name: ");
+		lblName.setBounds(10, 105, 425, 14);
+		panel5.add(lblName);
+
+		final JLabel lblType = new JLabel("Type:");
+		lblType.setBounds(10, 130, 425, 14);
+		panel5.add(lblType);
+
+		final JLabel lblLocations = new JLabel("Location(s):");
+		lblLocations.setBounds(10, 155, 425, 14);
+		panel5.add(lblLocations);
+
+		final JLabel lblOverlay = new JLabel("Overlay:");
+		lblOverlay.setBounds(10, 180, 425, 14);
+		panel5.add(lblOverlay);
+
+		JButton btnBegin = new JButton("Begin");
+		btnBegin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String cmIn;
+				String[] splitIn;
+				int i = 0;
+
+				cmIn = txtCMIn.getText().trim();
+
+				splitIn = cmIn.split(",");
+
+				lblName.setText("Name: " + splitIn[0]);
+				lblType.setText("Type: " + splitIn[1]);
+				lblLocations.setText("Location(s): " + splitIn[2]);
+				lblOverlay.setText("Overlay: " + splitIn[3]);
+
+				
+
+				txtCMIn.setText("");
+
+			}
+		});
+		btnBegin.setBounds(168, 54, 89, 23);
+		panel5.add(btnBegin);
+
 	}
 
 	protected JComponent makeTextPanel(String text) {
@@ -400,7 +493,7 @@ public class Toolkit extends JPanel {
 
 		// Display the window.
 		// frame.pack();
-		frame.setSize(600, 400);
+		frame.setSize(475, 350);
 		frame.setVisible(true);
 	}
 
@@ -539,7 +632,7 @@ public class Toolkit extends JPanel {
 
 			img = "wedgeright";
 		}
-		
+
 		if (f.equals("insurgents") == true) {
 
 			img = "Insurgents";
@@ -554,9 +647,6 @@ public class Toolkit extends JPanel {
 
 			img = "Civilians";
 		}
-
-
-
 
 		img = img + ".png";
 
