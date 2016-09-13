@@ -1,12 +1,11 @@
-import org.junit.*;
-import org.sikuli.*;
+import org.junit.Before;
 import org.sikuli.script.FindFailed;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
+import org.junit.After;
 
-@SuppressWarnings("serial")
 public class ControlMeasureCreation {
-	
+
 	Toolkit t = new Toolkit();
 
 	@Before
@@ -15,16 +14,23 @@ public class ControlMeasureCreation {
 	}
 
 	public void getCoordinates(String coor) {
+
 		Screen s = new Screen();
+
 		Pattern p;
-		
-		p = new Pattern("images/CMCreation/add.png");
+
 		try {
+
+			p = new Pattern("images/CMCreation/add.png");
 			s.find(p.similar(0.95f));
+			s.click(p.similar(0.90f));// click add
+
+			p = new Pattern("images/CMCreation/add.png");
+			t.lblPassFail.setText("Pass");
+
 		} catch (FindFailed e) {
 			t.lblPassFail.setText("Fail");
 		}
-		
 
 	}
 

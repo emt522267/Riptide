@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry including="Civilians.png|Insurgents.png|USMC.png|colleft.png|colright.png|column.png|diamond.png|eleft.png|eright.png|file.png|line.png|lineleft.png|lineright.png|overlaperight.png|staggeredcol.png|staggeredcolwith.png|v.png|wedge.png|wedgeleft.png|wedgeright.png" kind="src" output="images" path="images"/>
+	<classpathentry kind="lib" path="libs/sikulixapi.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="C:/Users/kevin.anderson/Downloads/sikulix.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

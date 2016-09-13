@@ -46,7 +46,7 @@ public class Toolkit extends JPanel {
 	JTextField txtIn;
 	JTextField txtOut;
 	JPanel pnlImgCmpr;
-	JPanel pmlCM = new JPanel();
+	JPanel pnlCM = new JPanel();
 	JTextField txtCompare;
 	JLabel lblLookup;
 	JLabel lblImage;
@@ -56,6 +56,8 @@ public class Toolkit extends JPanel {
 	JLabel lblSpacing;
 	JTextField txtCMIn;
 	final JLabel lblPassFail = new JLabel("");
+	
+
 
 	public Toolkit() {
 		Dimension minimumSize = new Dimension(100, 100);
@@ -390,29 +392,29 @@ public class Toolkit extends JPanel {
 		// Add the tabbed pane to this panel.
 		add(tabbedPane);
 
-		pmlCM.setBorder(null);
+		pnlCM.setBorder(null);
 		// setpanel4(panel4);
-		pmlCM.setLayout(null);
+		pnlCM.setLayout(null);
 
-		tabbedPane.addTab("Control Measures", pmlCM);
+		tabbedPane.addTab("Control Measures", pnlCM);
 
 		
 		lblPassFail.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblPassFail.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPassFail.setBounds(116, 215, 196, 27);
-		pmlCM.add(lblPassFail);
+		pnlCM.add(lblPassFail);
 
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setForeground(Color.ORANGE);
 		separator_2.setBackground(Color.BLUE);
 		separator_2.setBounds(144, 242, 140, 2);
-		pmlCM.add(separator_2);
+		pnlCM.add(separator_2);
 
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setForeground(Color.BLUE);
 		separator_3.setBackground(Color.ORANGE);
 		separator_3.setBounds(144, 215, 140, 2);
-		pmlCM.add(separator_3);
+		pnlCM.add(separator_3);
 
 		txtCMIn = new JTextField();
 		txtCMIn.addMouseListener(new MouseAdapter() {
@@ -424,24 +426,24 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtCMIn.setBounds(10, 23, 425, 20);
-		pmlCM.add(txtCMIn);
+		pnlCM.add(txtCMIn);
 		txtCMIn.setColumns(10);
 
 		final JLabel lblName = new JLabel("Name: ");
 		lblName.setBounds(10, 105, 425, 14);
-		pmlCM.add(lblName);
+		pnlCM.add(lblName);
 
 		final JLabel lblType = new JLabel("Type:");
 		lblType.setBounds(10, 130, 425, 14);
-		pmlCM.add(lblType);
+		pnlCM.add(lblType);
 
 		final JLabel lblLocations = new JLabel("Location(s):");
 		lblLocations.setBounds(10, 155, 425, 14);
-		pmlCM.add(lblLocations);
+		pnlCM.add(lblLocations);
 
 		final JLabel lblOverlay = new JLabel("Overlay:");
 		lblOverlay.setBounds(10, 180, 425, 14);
-		pmlCM.add(lblOverlay);
+		pnlCM.add(lblOverlay);
 
 		JButton btnBegin = new JButton("Begin");
 		btnBegin.addActionListener(new ActionListener() {
@@ -458,8 +460,7 @@ public class Toolkit extends JPanel {
 				int e = 2;
 				int r = 3;
 
-				ControlMeasureCreation CM = new ControlMeasureCreation();
-
+				
 				cmIn = txtCMIn.getText().trim();
 
 				splitIn = cmIn.split(",");
@@ -477,6 +478,8 @@ public class Toolkit extends JPanel {
 				try {
 
 					do {
+						
+						ControlMeasureCreation CM = new ControlMeasureCreation();
 						coorA = coorSplit[q] + " " + coorSplit[w] + " " + coorSplit[e] + " " + coorSplit[r];
 
 						coorB = coordinates(coorA);
@@ -494,7 +497,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		btnBegin.setBounds(168, 54, 89, 23);
-		pmlCM.add(btnBegin);
+		pnlCM.add(btnBegin);
 
 	}
 
