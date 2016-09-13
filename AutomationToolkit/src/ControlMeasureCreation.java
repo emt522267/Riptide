@@ -14,8 +14,15 @@ public class ControlMeasureCreation {
 	}
 
 	public void getCoordinates(String coor) {
+		
+		final Thread t1 = new Thread(new Runnable() {
+		     public void run() {
+		          // code goes here.
+		     
+		
 
 		Screen s = new Screen();
+		
 
 		Pattern p;
 
@@ -31,6 +38,10 @@ public class ControlMeasureCreation {
 		} catch (FindFailed e) {
 			t.lblPassFail.setText("Fail");
 		}
+		
+		     }
+		}); 
+		t1.start();
 
 	}
 
