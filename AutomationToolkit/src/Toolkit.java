@@ -33,28 +33,29 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class Toolkit extends JPanel {
 
-	private JLabel filler;
-	private JPanel panel;
-	JPanel panel1;
+	 JLabel filler;
+	JPanel panel;
+	JPanel pnlCoorSpltr;
 	JTextField txtInput;
 	JTextField txtZone;
 	Button btnSubmit;
 	JTextField txtUSGID;
 	JTextField txtCoor;
-	private JPanel panel2;
-	private JPanel panel4;
-	private JTextField txtIn;
-	private JTextField txtOut;
-	JPanel panel3;
-	JPanel panel5 = new JPanel();
-	private JTextField txtCompare;
-	private JLabel lblLookup;
-	private JLabel lblImage;
-	private JTextField txtFormation;
-	private JLabel lblFormation;
-	private JTextField txtSpacing;
-	private JLabel lblSpacing;
-	private JTextField txtCMIn;
+	JPanel pnlRemoveChar;
+	JPanel pnlOther;
+	JTextField txtIn;
+	JTextField txtOut;
+	JPanel pnlImgCmpr;
+	JPanel pmlCM = new JPanel();
+	JTextField txtCompare;
+	JLabel lblLookup;
+	JLabel lblImage;
+	JTextField txtFormation;
+	JLabel lblFormation;
+	JTextField txtSpacing;
+	JLabel lblSpacing;
+	JTextField txtCMIn;
+	final JLabel lblPassFail = new JLabel("");
 
 	public Toolkit() {
 		Dimension minimumSize = new Dimension(100, 100);
@@ -65,10 +66,10 @@ public class Toolkit extends JPanel {
 
 		tabbedPane.setMinimumSize(minimumSize);
 
-		panel1 = new JPanel();
-		panel1.setBorder(null);
+		pnlCoorSpltr = new JPanel();
+		pnlCoorSpltr.setBorder(null);
 		// setPanel1(panel1);
-		panel1.setLayout(null);
+		pnlCoorSpltr.setLayout(null);
 
 		txtInput = new JTextField();
 		txtInput.addMouseListener(new MouseAdapter() {
@@ -79,7 +80,7 @@ public class Toolkit extends JPanel {
 		});
 		txtInput.setBounds(5, 5, 424, 20);
 		txtInput.setText("COORDINATES GO HERE...FORMAT XXX XX XXXXX XXXXX");
-		panel1.add(txtInput);
+		pnlCoorSpltr.add(txtInput);
 		txtInput.setColumns(10);
 
 		txtZone = new JTextField();
@@ -92,7 +93,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtZone.setBounds(10, 87, 86, 20);
-		panel1.add(txtZone);
+		pnlCoorSpltr.add(txtZone);
 		txtZone.setColumns(10);
 
 		btnSubmit = new Button("Submit");
@@ -126,7 +127,7 @@ public class Toolkit extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		panel1.add(btnSubmit);
+		pnlCoorSpltr.add(btnSubmit);
 
 		txtUSGID = new JTextField();
 		txtUSGID.addMouseListener(new MouseAdapter() {
@@ -137,7 +138,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtUSGID.setBounds(106, 87, 86, 20);
-		panel1.add(txtUSGID);
+		pnlCoorSpltr.add(txtUSGID);
 		txtUSGID.setColumns(10);
 
 		txtCoor = new JTextField();
@@ -148,7 +149,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtCoor.setBounds(202, 87, 227, 20);
-		panel1.add(txtCoor);
+		pnlCoorSpltr.add(txtCoor);
 		txtCoor.setColumns(10);
 
 		JLabel lblZone = new JLabel("Zone");
@@ -161,7 +162,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		lblZone.setBounds(50, 70, 46, 14);
-		panel1.add(lblZone);
+		pnlCoorSpltr.add(lblZone);
 
 		JLabel lblkmId = new JLabel("100km ID");
 		lblkmId.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -173,7 +174,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		lblkmId.setBounds(124, 70, 68, 14);
-		panel1.add(lblkmId);
+		pnlCoorSpltr.add(lblkmId);
 
 		JLabel lblCoordinates = new JLabel("Coordinates");
 		lblCoordinates.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -185,20 +186,20 @@ public class Toolkit extends JPanel {
 		});
 		setLayout(null);
 		lblCoordinates.setBounds(309, 70, 120, 14);
-		panel1.add(lblCoordinates);
+		pnlCoorSpltr.add(lblCoordinates);
 
-		tabbedPane.addTab("Coordinate Splitter", panel1);
+		tabbedPane.addTab("Coordinate Splitter", pnlCoorSpltr);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
 		// Add the tabbed pane to this panel.
 		add(tabbedPane);
 
-		panel3 = new JPanel();
-		panel3.setBorder(null);
+		pnlImgCmpr = new JPanel();
+		pnlImgCmpr.setBorder(null);
 		// setpanel3(panel3);
-		panel3.setLayout(null);
+		pnlImgCmpr.setLayout(null);
 
-		tabbedPane.addTab("Image Compare", panel3);
+		tabbedPane.addTab("Image Compare", pnlImgCmpr);
 
 		txtCompare = new JTextField();
 		txtCompare.addMouseListener(new MouseAdapter() {
@@ -208,28 +209,28 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtCompare.setBounds(10, 31, 425, 20);
-		panel3.add(txtCompare);
+		pnlImgCmpr.add(txtCompare);
 		txtCompare.setColumns(10);
 
 		lblLookup = new JLabel("Lookup:");
 		lblLookup.setBounds(389, 11, 46, 14);
-		panel3.add(lblLookup);
+		pnlImgCmpr.add(lblLookup);
 
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.MAGENTA);
 		separator.setBackground(Color.YELLOW);
 		separator.setBounds(10, 200, 425, 10);
-		panel3.add(separator);
+		pnlImgCmpr.add(separator);
 
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.YELLOW);
 		separator_1.setBackground(Color.MAGENTA);
 		separator_1.setBounds(10, 251, 425, 10);
-		panel3.add(separator_1);
+		pnlImgCmpr.add(separator_1);
 		lblImage = new JLabel("");
 
 		lblImage.setBounds(96, 210, 243, 40);
-		panel3.add(lblImage);
+		pnlImgCmpr.add(lblImage);
 
 		Button btnGo = new Button("Submit");
 		btnGo.addActionListener(new ActionListener() {
@@ -274,7 +275,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		btnGo.setBounds(163, 57, 70, 22);
-		panel3.add(btnGo);
+		pnlImgCmpr.add(btnGo);
 
 		txtFormation = new JTextField();
 		txtFormation.addMouseListener(new MouseAdapter() {
@@ -285,13 +286,13 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtFormation.setBounds(10, 125, 185, 20);
-		panel3.add(txtFormation);
+		pnlImgCmpr.add(txtFormation);
 		txtFormation.setColumns(10);
 
 		lblFormation = new JLabel("Formation:");
 		lblFormation.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblFormation.setBounds(96, 107, 99, 14);
-		panel3.add(lblFormation);
+		pnlImgCmpr.add(lblFormation);
 
 		txtSpacing = new JTextField();
 		txtSpacing.addMouseListener(new MouseAdapter() {
@@ -303,18 +304,18 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtSpacing.setBounds(250, 125, 185, 20);
-		panel3.add(txtSpacing);
+		pnlImgCmpr.add(txtSpacing);
 		txtSpacing.setColumns(10);
 
 		lblSpacing = new JLabel("Spacing:");
 		lblSpacing.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblSpacing.setBounds(336, 107, 99, 14);
-		panel3.add(lblSpacing);
+		pnlImgCmpr.add(lblSpacing);
 
-		panel2 = new JPanel();
-		panel2.setLayout(null);
-		panel2.setBorder(new EmptyBorder(5, 5, 5, 5));
-		tabbedPane.addTab("Remove Special Chars", null, panel2, null);
+		pnlRemoveChar = new JPanel();
+		pnlRemoveChar.setLayout(null);
+		pnlRemoveChar.setBorder(new EmptyBorder(5, 5, 5, 5));
+		tabbedPane.addTab("Remove Special Chars", null, pnlRemoveChar, null);
 
 		txtIn = new JTextField();
 		txtIn.addMouseListener(new MouseAdapter() {
@@ -325,7 +326,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtIn.setBounds(10, 29, 223, 20);
-		panel2.add(txtIn);
+		pnlRemoveChar.add(txtIn);
 		txtIn.setColumns(10);
 
 		txtOut = new JTextField();
@@ -336,18 +337,18 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtOut.setBounds(10, 117, 223, 20);
-		panel2.add(txtOut);
+		pnlRemoveChar.add(txtOut);
 		txtOut.setColumns(10);
 
 		JLabel lblIn = new JLabel("In:");
 		lblIn.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblIn.setBounds(187, 11, 46, 14);
-		panel2.add(lblIn);
+		pnlRemoveChar.add(lblIn);
 
 		JLabel lblOut = new JLabel("Out:");
 		lblOut.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblOut.setBounds(187, 97, 46, 14);
-		panel2.add(lblOut);
+		pnlRemoveChar.add(lblOut);
 
 		JButton btnTransform = new JButton("Transform");
 		btnTransform.addActionListener(new ActionListener() {
@@ -364,7 +365,7 @@ public class Toolkit extends JPanel {
 			}
 		});
 		btnTransform.setBounds(10, 169, 115, 23);
-		panel2.add(btnTransform);
+		pnlRemoveChar.add(btnTransform);
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { tabbedPane, filler, panel }));
 		setLayout(null);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
@@ -372,13 +373,13 @@ public class Toolkit extends JPanel {
 		// Add the tabbed pane to this panel.
 		add(tabbedPane);
 
-		panel4 = new JPanel();
-		panel4.setBorder(null);
+		pnlOther = new JPanel();
+		pnlOther.setBorder(null);
 		// setpanel4(panel4);
-		panel4.setLayout(null);
+		pnlOther.setLayout(null);
 		setLayout(null);
 
-		tabbedPane.addTab("Other", panel4);
+		tabbedPane.addTab("Other", pnlOther);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 
 		// Add the tabbed pane to this panel.
@@ -389,29 +390,29 @@ public class Toolkit extends JPanel {
 		// Add the tabbed pane to this panel.
 		add(tabbedPane);
 
-		panel5.setBorder(null);
+		pmlCM.setBorder(null);
 		// setpanel4(panel4);
-		panel5.setLayout(null);
+		pmlCM.setLayout(null);
 
-		tabbedPane.addTab("Control Measures", panel5);
+		tabbedPane.addTab("Control Measures", pmlCM);
 
-		JLabel lblPassFail = new JLabel("");
+		
 		lblPassFail.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblPassFail.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPassFail.setBounds(116, 215, 196, 27);
-		panel5.add(lblPassFail);
+		pmlCM.add(lblPassFail);
 
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setForeground(Color.ORANGE);
 		separator_2.setBackground(Color.BLUE);
 		separator_2.setBounds(144, 242, 140, 2);
-		panel5.add(separator_2);
+		pmlCM.add(separator_2);
 
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setForeground(Color.BLUE);
 		separator_3.setBackground(Color.ORANGE);
 		separator_3.setBounds(144, 215, 140, 2);
-		panel5.add(separator_3);
+		pmlCM.add(separator_3);
 
 		txtCMIn = new JTextField();
 		txtCMIn.addMouseListener(new MouseAdapter() {
@@ -423,24 +424,24 @@ public class Toolkit extends JPanel {
 			}
 		});
 		txtCMIn.setBounds(10, 23, 425, 20);
-		panel5.add(txtCMIn);
+		pmlCM.add(txtCMIn);
 		txtCMIn.setColumns(10);
 
 		final JLabel lblName = new JLabel("Name: ");
 		lblName.setBounds(10, 105, 425, 14);
-		panel5.add(lblName);
+		pmlCM.add(lblName);
 
 		final JLabel lblType = new JLabel("Type:");
 		lblType.setBounds(10, 130, 425, 14);
-		panel5.add(lblType);
+		pmlCM.add(lblType);
 
 		final JLabel lblLocations = new JLabel("Location(s):");
 		lblLocations.setBounds(10, 155, 425, 14);
-		panel5.add(lblLocations);
+		pmlCM.add(lblLocations);
 
 		final JLabel lblOverlay = new JLabel("Overlay:");
 		lblOverlay.setBounds(10, 180, 425, 14);
-		panel5.add(lblOverlay);
+		pmlCM.add(lblOverlay);
 
 		JButton btnBegin = new JButton("Begin");
 		btnBegin.addActionListener(new ActionListener() {
@@ -448,7 +449,16 @@ public class Toolkit extends JPanel {
 
 				String cmIn;
 				String[] splitIn;
-				int i = 0;
+				String[] coorSplit;
+				String coorA;
+				String coorB;
+				int t = 4;
+				int q = 0;
+				int w = 1;
+				int e = 2;
+				int r = 3;
+
+				ControlMeasureCreation CM = new ControlMeasureCreation();
 
 				cmIn = txtCMIn.getText().trim();
 
@@ -459,14 +469,32 @@ public class Toolkit extends JPanel {
 				lblLocations.setText("Location(s): " + splitIn[2]);
 				lblOverlay.setText("Overlay: " + splitIn[3]);
 
-				
-
+				lblPassFail.setText("");
 				txtCMIn.setText("");
+
+				coorSplit = splitIn[2].split(" ");
+
+				try {
+
+					do {
+						coorA = coorSplit[q] + " " + coorSplit[w] + " " + coorSplit[e] + " " + coorSplit[r];
+
+						coorB = coordinates(coorA);
+						CM.getCoordinates(coorB);
+
+						q = q + t;
+						w = w + t;
+						e = e + t;
+						r = r + t;
+					} while (r < coorSplit.length);
+				} catch (ArrayIndexOutOfBoundsException ex) {
+
+				}
 
 			}
 		});
 		btnBegin.setBounds(168, 54, 89, 23);
-		panel5.add(btnBegin);
+		pmlCM.add(btnBegin);
 
 	}
 
