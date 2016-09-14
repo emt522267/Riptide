@@ -33,7 +33,7 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class Toolkit extends JPanel {
 
-	 JLabel filler;
+	JLabel filler;
 	JPanel panel;
 	JPanel pnlCoorSpltr;
 	JTextField txtInput;
@@ -54,10 +54,11 @@ public class Toolkit extends JPanel {
 	JLabel lblFormation;
 	JTextField txtSpacing;
 	JLabel lblSpacing;
-	JTextField txtCMIn;
-	final JLabel lblPassFail = new JLabel("");
-	
-
+	JLabel lblPassFail = new JLabel("");
+	private JTextField txtName;
+	private JTextField txtType;
+	private JTextField txtLocation;
+	private JTextField txtOverlay;
 
 	public Toolkit() {
 		Dimension minimumSize = new Dimension(100, 100);
@@ -398,7 +399,6 @@ public class Toolkit extends JPanel {
 
 		tabbedPane.addTab("Control Measures", pnlCM);
 
-		
 		lblPassFail.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblPassFail.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPassFail.setBounds(116, 215, 196, 27);
@@ -415,19 +415,6 @@ public class Toolkit extends JPanel {
 		separator_3.setBackground(Color.ORANGE);
 		separator_3.setBounds(144, 215, 140, 2);
 		pnlCM.add(separator_3);
-
-		txtCMIn = new JTextField();
-		txtCMIn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-
-				txtCMIn.setText("");
-
-			}
-		});
-		txtCMIn.setBounds(10, 23, 425, 20);
-		pnlCM.add(txtCMIn);
-		txtCMIn.setColumns(10);
 
 		final JLabel lblName = new JLabel("Name: ");
 		lblName.setBounds(10, 105, 425, 14);
@@ -449,8 +436,6 @@ public class Toolkit extends JPanel {
 		btnBegin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				String cmIn;
-				String[] splitIn;
 				String[] coorSplit;
 				String coorA;
 				String coorB;
@@ -460,27 +445,29 @@ public class Toolkit extends JPanel {
 				int e = 2;
 				int r = 3;
 
-				
-				cmIn = txtCMIn.getText().trim();
+				// cmIn = txtCMIn.getText().trim();
 
-				splitIn = cmIn.split(",");
+				// splitIn = cmIn.split(",");
 
-				lblName.setText("Name: " + splitIn[0]);
-				lblType.setText("Type: " + splitIn[1]);
-				lblLocations.setText("Location(s): " + splitIn[2]);
-				lblOverlay.setText("Overlay: " + splitIn[3]);
+				lblName.setText("Name: " + txtName.getText().trim());
+				lblType.setText("Type: " + txtType.getText().trim());
+				lblLocations.setText("Location(s): " + txtLocation.getText().trim());
+				lblOverlay.setText("Overlay: " + txtOverlay.getText().trim());
+
+				coorSplit = txtLocation.getText().split(" ");
 
 				lblPassFail.setText("");
-				txtCMIn.setText("");
-
-				coorSplit = splitIn[2].split(" ");
-
+				txtName.setText("");
+				txtType.setText("");
+				txtOverlay.setText("");
+				txtLocation.setText("");
+				
 				try {
 
 					do {
-						
+
 						ControlMeasureCreation CM = new ControlMeasureCreation();
-						coorA = coorSplit[q] + " " + coorSplit[w] + " " + coorSplit[e] + " " + coorSplit[r];
+						coorA = coorSplit[q].trim() + " " + coorSplit[w].trim() + " " + coorSplit[e].trim() + " " + coorSplit[r].trim();
 
 						coorB = coordinates(coorA);
 						CM.getCoordinates(coorB);
@@ -496,8 +483,73 @@ public class Toolkit extends JPanel {
 
 			}
 		});
-		btnBegin.setBounds(168, 54, 89, 23);
+		btnBegin.setBounds(165, 81, 89, 23);
 		pnlCM.add(btnBegin);
+
+		txtName = new JTextField();
+		txtName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				txtName.setText("");
+			}
+		});
+		txtName.setBounds(34, 39, 86, 20);
+		pnlCM.add(txtName);
+		txtName.setColumns(10);
+
+		txtType = new JTextField();
+		txtType.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtType.setText("");
+			}
+		});
+		txtType.setBounds(130, 39, 86, 20);
+		pnlCM.add(txtType);
+		txtType.setColumns(10);
+
+		txtLocation = new JTextField();
+		txtLocation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			txtLocation.setText("");
+			}
+		});
+		txtLocation.setBounds(226, 39, 86, 20);
+		pnlCM.add(txtLocation);
+		txtLocation.setColumns(10);
+
+		txtOverlay = new JTextField();
+		txtOverlay.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				txtOverlay.setText("");
+			}
+		});
+		txtOverlay.setBounds(333, 39, 86, 20);
+		pnlCM.add(txtOverlay);
+		txtOverlay.setColumns(10);
+
+		JLabel lblName_1 = new JLabel("Name");
+		lblName_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblName_1.setBounds(34, 25, 86, 14);
+		pnlCM.add(lblName_1);
+
+		JLabel lblNewLabel = new JLabel("Type");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel.setBounds(144, 25, 72, 14);
+		pnlCM.add(lblNewLabel);
+
+		JLabel lblNewLabel_1 = new JLabel("Location");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel_1.setBounds(226, 25, 86, 14);
+		pnlCM.add(lblNewLabel_1);
+
+		JLabel lblNewLabel_2 = new JLabel("Overlay");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel_2.setBounds(333, 25, 86, 14);
+		pnlCM.add(lblNewLabel_2);
 
 	}
 
